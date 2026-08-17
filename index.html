@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dropoly — казуальная головоломка number merge drop. Тапай по колонке, роняй плитки, запускай каскады слияний.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235B4FE0'/%3E%3Ctext x='32' y='42' font-size='26' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'%3E2%E2%81%B4%3C/text%3E%3C/svg%3E">
+<title>Dropoly — тапай, роняй, сливай</title>
+<style>
+  :root {
+    --bg: #F7F5F1;
+    --bg-raised: #FFFFFF;
+    --text: #1C1B2A;
+    --text-muted: #6B6880;
+    --rule: #E4E1DA;
+    --accent: #5B4FE0;
+    --accent-soft: #EDEBFC;
+    --accent-ink: #3D34A8;
+    --tile-amber: #E8A33D;
+    --focus: #5B4FE0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15142A;
+      --bg-raised: #1D1C38;
+      --text: #ECEAF8;
+      --text-muted: #A6A2C4;
+      --rule: #322F55;
+      --accent: #8B7FF5;
+      --accent-soft: #262351;
+      --accent-ink: #C4BCFB;
+      --tile-amber: #F2B85A;
+      --focus: #8B7FF5;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Noto Serif", serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 680px);
+    gap: 64px;
+    justify-content: center;
+  }
+
+  header.hero {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 32px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+
+  .hero-left { display: flex; align-items: flex-end; gap: 20px; }
+
+  .mark {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, var(--accent) 0%, var(--accent-ink) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    box-shadow: 0 10px 24px -12px var(--accent-ink);
+    text-decoration: none;
+  }
+
+  .hero-text { display: flex; flex-direction: column; gap: 6px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  h1 {
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 3.6vw, 38px);
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .meta {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .meta a { color: var(--accent-ink); }
+
+  .header-link {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--accent-ink);
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 11px 18px;
+    flex: none;
+  }
+
+  .header-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  nav.toc {
+    align-self: start;
+    position: sticky;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: fit-content;
+  }
+
+  nav.toc .toc-label {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  nav.toc a {
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 8px;
+    line-height: 1.35;
+  }
+
+  nav.toc a:hover, nav.toc a:focus-visible { color: var(--text); background: var(--accent-soft); }
+  nav.toc a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  main { min-width: 0; }
+
+  main > p.lede { color: var(--text-muted); font-size: 16px; margin: 0 0 40px; }
+
+  section {
+    padding: 34px 0;
+    border-bottom: 1px solid var(--rule);
+    scroll-margin-top: 32px;
+  }
+
+  section:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+  .section-num {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 13px;
+    color: var(--tile-amber);
+    letter-spacing: 0.04em;
+  }
+
+  h2 {
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    margin: 4px 0 14px;
+    text-wrap: balance;
+  }
+
+  p { margin: 0 0 14px; max-width: 66ch; }
+
+  ul {
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 66ch;
+  }
+
+  li { position: relative; padding-left: 22px; }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    background: var(--accent);
+  }
+
+  li b, li strong { color: var(--text); }
+
+  a { color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .shots {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 4px 0 24px;
+  }
+
+  .shots img {
+    width: calc(33.333% - 10px);
+    min-width: 140px;
+    flex: 1 1 140px;
+    border-radius: 12px;
+    border: 1px solid var(--rule);
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    max-width: 66ch;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    margin: 4px 0 14px;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  th {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--accent-soft);
+  }
+
+  .contact-card {
+    margin-top: 40px;
+    padding: 22px 24px;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-card p { margin: 0; color: var(--text-muted); font-size: 14.5px; }
+
+  .contact-card a {
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 860px) {
+    .page { grid-template-columns: minmax(0, 680px); }
+    nav.toc { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    nav.toc .toc-label { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="hero-left">
+      <a class="mark" href="index.html" aria-label="Dropoly — на главную">2⁴</a>
+      <div class="hero-text">
+        <span class="eyebrow">Dropoly</span>
+        <h1>Тапай, роняй, сливай</h1>
+        <div class="meta">
+          <span>Головоломка number merge drop</span>
+          <span>Разработчик: Nightwelf</span>
+          <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <a class="header-link" href="privacy-policy.html">Политика конфиденциальности</a>
+  </header>
+
+  <nav class="toc" aria-label="Содержание">
+    <span class="toc-label">Разделы</span>
+    <a href="#about">О чём игра</a>
+    <a href="#how-to-play">Как играть</a>
+    <a href="#rewards">Прокачка и награды</a>
+    <a href="#difficulty">Сложность</a>
+    <a href="#daily">Ежедневный челлендж</a>
+    <a href="#offline">Без аккаунтов и интернета</a>
+  </nav>
+
+  <main>
+    <p class="lede">Казуальная головоломка в жанре number merge drop (в духе Drop the Number, 2248, Merge Block).
+    Тапаешь по колонке — плитка падает вниз и сливается с соседями того же номинала, запуская каскад слияний.</p>
+
+    <div class="shots">
+      <img src="screenshots/board.png" alt="Игровое поле Dropoly">
+      <img src="screenshots/skins.png" alt="Выбор скинов">
+      <img src="screenshots/difficulty.png" alt="Выбор сложности">
+    </div>
+
+    <section id="about">
+      <span class="section-num">01</span>
+      <h2>О чём игра</h2>
+      <p>Никаких ходов на клетку и никакой перегрузки правилами: тапаешь по колонке — плитка падает вниз и
+      сливается с соседями того же номинала. Слияние может задеть следующую плитку, та — ещё одну, и по полю
+      пробегает каскад слияний, который сам считает себе множитель очков. Простое правило, но взгляд не
+      оторвать — и одной партией дело обычно не ограничивается.</p>
+    </section>
+
+    <section id="how-to-play">
+      <span class="section-num">02</span>
+      <h2>Как играть</h2>
+      <ul>
+        <li><b>Тап по колонке</b> — плитка падает и сливается с соседями того же номинала (степени двойки: 2, 4, 8, 16…)</li>
+        <li><b>Каскады</b> — одно слияние запускает следующее, очки начисляются за номинал × множитель каскада: чем длиннее цепочка, тем жирнее счёт</li>
+        <li><b>Бесконечный забег</b> — без уровней и подсказок «пройди дальше»: цель — личный рекорд по очкам и максимальному номиналу на поле</li>
+      </ul>
+    </section>
+
+    <section id="rewards">
+      <span class="section-num">03</span>
+      <h2>Прокачка и награды</h2>
+      <p>За игру начисляются монеты и опыт — уровень игрока открывает новые скины, аватары и темы оформления.
+      Это не косметика ради косметики: прогресс в забегах напрямую превращается в то, чем можно играть дальше.</p>
+
+      <div class="shots">
+        <img src="screenshots/avatars.png" alt="Аватары">
+        <img src="screenshots/themes.png" alt="Темы оформления">
+        <img src="screenshots/achievements.png" alt="Достижения">
+      </div>
+
+      <ul>
+        <li><b>Скины плиток</b> — от классической палитры до неона, пастели, океана и монохрома</li>
+        <li><b>Аватары</b> — 12 значков профиля, часть открывается сразу, остальные — по уровню</li>
+        <li><b>Темы интерфейса</b> — Dark, Light, Midnight, Forest, Sunset и другие</li>
+        <li><b>Достижения</b> — за первое слияние, за каскады x4, x8, x16, x32 и дальше — есть что коллекционировать</li>
+      </ul>
+    </section>
+
+    <section id="difficulty">
+      <span class="section-num">04</span>
+      <h2>Сложность под настроение</h2>
+      <p>Одно и то же поле играется совсем по-разному в зависимости от режима:</p>
+      <table>
+        <thead>
+          <tr><th>Режим</th><th>Что меняется</th><th>Макс. плитка</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Easy</td><td>Следующая плитка видна, бомбы редки, проигрыш — только когда занято всё поле</td><td>16384</td></tr>
+          <tr><td>Normal</td><td>Следующая плитка видна, проигрыш — когда занято всё поле</td><td>8192</td></tr>
+          <tr><td>Hard</td><td>Следующая плитка скрыта, бомбы чаще, проигрыш — когда занято всё поле</td><td>4096</td></tr>
+          <tr><td>Expert</td><td>Следующая плитка скрыта, бомб много, проигрыш — как только заполнилась хотя бы одна колонка</td><td>2048</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="daily">
+      <span class="section-num">05</span>
+      <h2>Ежедневный челлендж</h2>
+      <p>Каждый день — один и тот же сид для всех: одинаковая последовательность плиток выпадает у каждого
+      игрока. Условия честные, разница только в том, кто лучше распорядится одинаковым набором.</p>
+    </section>
+
+    <section id="offline">
+      <span class="section-num">06</span>
+      <h2>Без аккаунтов и без интернета</h2>
+      <p>Играть можно полностью офлайн — прогресс, монеты и рекорды хранятся прямо на устройстве. Не нужно ни
+      регистрироваться, ни быть онлайн, чтобы уронить очередную плитку.</p>
+
+      <div class="contact-card">
+        <p>Вопросы по обработке данных — смотрите политику конфиденциальности.</p>
+        <a href="privacy-policy.html">Политика конфиденциальности</a>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
