@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Dropoly privacy policy / Политика конфиденциальности Dropoly">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235B4FE0'/%3E%3Ctext x='32' y='42' font-size='26' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'%3E2%E2%81%B4%3C/text%3E%3C/svg%3E">
+<title>Dropoly — Privacy Policy / Политика конфиденциальности</title>
+<style>
+  :root {
+    --bg: #F7F5F1;
+    --bg-raised: #FFFFFF;
+    --text: #1C1B2A;
+    --text-muted: #6B6880;
+    --rule: #E4E1DA;
+    --accent: #5B4FE0;
+    --accent-soft: #EDEBFC;
+    --accent-ink: #3D34A8;
+    --tile-amber: #E8A33D;
+    --focus: #5B4FE0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15142A;
+      --bg-raised: #1D1C38;
+      --text: #ECEAF8;
+      --text-muted: #A6A2C4;
+      --rule: #322F55;
+      --accent: #8B7FF5;
+      --accent-soft: #262351;
+      --accent-ink: #C4BCFB;
+      --tile-amber: #F2B85A;
+      --focus: #8B7FF5;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Noto Serif", serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 680px);
+    gap: 64px;
+    justify-content: center;
+  }
+
+  header.hero {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 32px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+
+  .hero-left { display: flex; align-items: flex-end; gap: 20px; }
+
+  .mark {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, var(--accent) 0%, var(--accent-ink) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    box-shadow: 0 10px 24px -12px var(--accent-ink);
+  }
+
+  .hero-text { display: flex; flex-direction: column; gap: 6px; }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  h1 {
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 3.6vw, 38px);
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .meta {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .meta a { color: var(--accent-ink); }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    flex: none;
+  }
+
+  .lang-switch button {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .lang-switch button[aria-pressed="true"] {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .lang-switch button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  nav.toc {
+    align-self: start;
+    position: sticky;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: fit-content;
+  }
+
+  nav.toc .toc-label {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  nav.toc a {
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 8px;
+    line-height: 1.35;
+  }
+
+  nav.toc a:hover, nav.toc a:focus-visible { color: var(--text); background: var(--accent-soft); }
+  nav.toc a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  main { min-width: 0; }
+
+  main > p.lede { color: var(--text-muted); font-size: 16px; margin: 0 0 40px; }
+
+  section {
+    padding: 34px 0;
+    border-bottom: 1px solid var(--rule);
+    scroll-margin-top: 32px;
+  }
+
+  section:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+  .section-num {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    font-size: 13px;
+    color: var(--tile-amber);
+    letter-spacing: 0.04em;
+  }
+
+  h2 {
+    font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    margin: 4px 0 14px;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent-ink);
+    margin: 22px 0 8px;
+  }
+
+  p { margin: 0 0 14px; max-width: 66ch; }
+
+  ul {
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-width: 66ch;
+  }
+
+  li { position: relative; padding-left: 22px; }
+
+  li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    background: var(--accent);
+  }
+
+  a { color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .contact-card {
+    margin-top: 40px;
+    padding: 22px 24px;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-card p { margin: 0; color: var(--text-muted); font-size: 14.5px; }
+
+  .contact-card a {
+    font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+  }
+
+  [data-i18n] { display: none; }
+  html[data-lang="ru"] [data-i18n="ru"] { display: revert; }
+  html[data-lang="en"] [data-i18n="en"] { display: revert; }
+
+  @media (max-width: 860px) {
+    .page { grid-template-columns: minmax(0, 680px); }
+    nav.toc { position: static; flex-direction: row; flex-wrap: wrap; gap: 4px; }
+    nav.toc .toc-label { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="hero-left">
+      <div class="mark" aria-hidden="true">2⁴</div>
+      <div class="hero-text">
+        <span class="eyebrow">Dropoly</span>
+        <h1>
+          <span data-i18n="ru">Политика конфиденциальности</span>
+          <span data-i18n="en">Privacy Policy</span>
+        </h1>
+        <div class="meta">
+          <span data-i18n="ru">Вступает в силу 17.08.2026</span>
+          <span data-i18n="en">Effective August 17, 2026</span>
+          <span data-i18n="ru">Разработчик: Nightwelf</span>
+          <span data-i18n="en">Developer: Nightwelf</span>
+          <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Language / Язык">
+      <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Table of contents">
+    <span class="toc-label" data-i18n="ru">Разделы</span>
+    <span class="toc-label" data-i18n="en">Sections</span>
+    <a href="#collect"><span data-i18n="ru">1. Какие данные собираем</span><span data-i18n="en">1. Data we collect</span></a>
+    <a href="#use"><span data-i18n="ru">2. Для чего используем</span><span data-i18n="en">2. How we use it</span></a>
+    <a href="#share"><span data-i18n="ru">3. С кем делимся</span><span data-i18n="en">3. Who we share with</span></a>
+    <a href="#retain"><span data-i18n="ru">4. Хранение и удаление</span><span data-i18n="en">4. Retention & deletion</span></a>
+    <a href="#children"><span data-i18n="ru">5. Дети</span><span data-i18n="en">5. Children</span></a>
+    <a href="#security"><span data-i18n="ru">6. Безопасность</span><span data-i18n="en">6. Security</span></a>
+    <a href="#changes"><span data-i18n="ru">7. Изменения политики</span><span data-i18n="en">7. Policy changes</span></a>
+    <a href="#contact"><span data-i18n="ru">8. Контакты</span><span data-i18n="en">8. Contact</span></a>
+  </nav>
+
+  <main>
+    <p class="lede" data-i18n="ru">Игра Dropoly (Android/iOS) — головоломка number merge drop. Этот документ
+    объясняет, какие данные она собирает, зачем и с кем ими может делиться.
+    Использование игры означает согласие с этой политикой.</p>
+    <p class="lede" data-i18n="en">Dropoly (Android/iOS) is a number-merge-drop puzzle game. This document
+    explains what data it collects, why, and who it may be shared with.
+    Using the game means you agree to this policy.</p>
+
+    <section id="collect">
+      <span class="section-num">01</span>
+      <h2><span data-i18n="ru">Какие данные мы собираем</span><span data-i18n="en">Data we collect</span></h2>
+
+      <h3><span data-i18n="ru">Данные, которые вводит игрок</span><span data-i18n="en">Data you provide</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Никнейм и выбранный аватар — хранятся локально и в облаке для синхронизации прогресса.</span><span data-i18n="en">Nickname and chosen avatar — stored locally and in the cloud to sync your progress.</span></li>
+      </ul>
+
+      <h3><span data-i18n="ru">Данные устройства и техническая информация</span><span data-i18n="en">Device & technical data</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Идентификатор устройства (Android ID) — для привязки прогресса без учётной записи.</span><span data-i18n="en">Device identifier (Android ID) — links your progress without requiring an account.</span></li>
+        <li><span data-i18n="ru">Обезличенная диагностика: модель устройства, версия ОС и приложения, журналы сбоев (Firebase Crashlytics).</span><span data-i18n="en">Anonymized diagnostics: device model, OS and app version, crash logs (Firebase Crashlytics).</span></li>
+        <li><span data-i18n="ru">События использования: режимы игры, длина сессий, экраны, тепловая карта тапов по полю (Firebase Analytics) — для баланса и удобства игры.</span><span data-i18n="en">Usage events: game modes played, session length, screens visited, a tap heatmap on the board (Firebase Analytics) — used to balance and improve the game.</span></li>
+      </ul>
+
+      <h3><span data-i18n="ru">Игровой прогресс и достижения</span><span data-i18n="en">Progress & achievements</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Рекорды, статистика партий, купленные скины/аватары/темы, достижения и таблицы лидеров — в Cloud Firestore для синхронизации между устройствами.</span><span data-i18n="en">High scores, match statistics, purchased skins/avatars/themes, achievements and leaderboards — stored in Cloud Firestore to sync across devices.</span></li>
+        <li><span data-i18n="ru">Те же данные передаются Google Play Games Services / Game Center, если игрок вошёл в соответствующий аккаунт.</span><span data-i18n="en">The same data is shared with Google Play Games Services / Game Center if you're signed in to that account.</span></li>
+      </ul>
+
+      <h3><span data-i18n="ru">Push- и локальные уведомления</span><span data-i18n="en">Push & local notifications</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Токен push-уведомлений (Firebase Cloud Messaging) — для напоминаний о ежедневном испытании и серии побед. Локальные уведомления данные никуда не передают.</span><span data-i18n="en">Push notification token (Firebase Cloud Messaging) — used for daily-challenge and streak reminders. Local notifications don't send any data anywhere.</span></li>
+      </ul>
+
+      <h3><span data-i18n="ru">Покупки</span><span data-i18n="en">Purchases</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Отключение рекламы через магазин приложений — платёж обрабатывает Google Play / App Store, данные карты нам не передаются.</span><span data-i18n="en">Removing ads via the app store — payment is handled by Google Play / App Store; we never receive your card details.</span></li>
+        <li><span data-i18n="ru">Оплата через Яндекс Пэй — запрос обрабатывает сервер разработчика и провайдер Яндекс Пэй; мы получаем только статус и идентификатор транзакции.</span><span data-i18n="en">Payment via Yandex Pay — the request is handled by the developer's own server and the Yandex Pay provider; we only receive the transaction status and ID.</span></li>
+      </ul>
+
+      <h3><span data-i18n="ru">Реклама</span><span data-i18n="en">Advertising</span></h3>
+      <ul>
+        <li><span data-i18n="ru">Показ рекламы (Yandex Mobile Ads), включая rewarded-рекламу за бонусы, может включать передачу рекламного идентификатора устройства и технических данных рекламной сети.</span><span data-i18n="en">Showing ads (Yandex Mobile Ads), including rewarded ads for bonuses, may involve sharing your advertising identifier and technical data with the ad network.</span></li>
+      </ul>
+    </section>
+
+    <section id="use">
+      <span class="section-num">02</span>
+      <h2><span data-i18n="ru">Для чего используются данные</span><span data-i18n="en">How we use the data</span></h2>
+      <ul>
+        <li><span data-i18n="ru">работа и синхронизация игрового прогресса между устройствами;</span><span data-i18n="en">running and syncing your game progress across devices;</span></li>
+        <li><span data-i18n="ru">показ рекламы и обработка покупок;</span><span data-i18n="en">showing ads and processing purchases;</span></li>
+        <li><span data-i18n="ru">исправление ошибок и повышение стабильности приложения;</span><span data-i18n="en">fixing bugs and improving app stability;</span></li>
+        <li><span data-i18n="ru">анализ и улучшение игрового баланса и UX;</span><span data-i18n="en">analyzing and improving game balance and UX;</span></li>
+        <li><span data-i18n="ru">напоминания о ежедневных испытаниях и серии побед.</span><span data-i18n="en">reminding you about daily challenges and streaks.</span></li>
+      </ul>
+      <p data-i18n="ru">Мы не продаём персональные данные третьим лицам и не используем их для целей, не связанных с работой игры.</p>
+      <p data-i18n="en">We don't sell personal data to third parties and don't use it for purposes unrelated to running the game.</p>
+    </section>
+
+    <section id="share">
+      <span class="section-num">03</span>
+      <h2><span data-i18n="ru">С кем мы делимся данными</span><span data-i18n="en">Who we share data with</span></h2>
+      <p data-i18n="ru">Данные могут обрабатываться следующими сервисами — каждый по собственной политике конфиденциальности:</p>
+      <p data-i18n="en">Data may be processed by the following services, each under its own privacy policy:</p>
+      <ul>
+        <li>Google Firebase (Analytics, Crashlytics, Cloud Messaging, Remote Config, Cloud Firestore) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+        <li>Yandex (Yandex Mobile Ads, Yandex Pay) — <a href="https://yandex.ru/legal/confidential/" target="_blank" rel="noopener">yandex.ru/legal/confidential</a></li>
+        <li><span data-i18n="ru">Google Play Games Services / Apple Game Center — политика соответствующей платформы</span><span data-i18n="en">Google Play Games Services / Apple Game Center — see the respective platform's policy</span></li>
+        <li><span data-i18n="ru">Google Play / App Store — при оплате через магазин приложений</span><span data-i18n="en">Google Play / App Store — for purchases made through the app store</span></li>
+      </ul>
+    </section>
+
+    <section id="retain">
+      <span class="section-num">04</span>
+      <h2><span data-i18n="ru">Хранение и удаление данных</span><span data-i18n="en">Retention & deletion</span></h2>
+      <p data-i18n="ru">Данные профиля и прогресса хранятся, пока используется приложение. Чтобы запросить
+      удаление своих данных, напишите на <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a>,
+      указав никнейм и платформу (Android/iOS) — мы удалим профиль и связанный с ним прогресс
+      из облачного хранилища.</p>
+      <p data-i18n="en">Profile and progress data is kept for as long as you use the app. To request
+      deletion, email <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a> with your
+      nickname and platform (Android/iOS) — we'll delete your profile and associated progress
+      from cloud storage.</p>
+    </section>
+
+    <section id="children">
+      <span class="section-num">05</span>
+      <h2><span data-i18n="ru">Дети</span><span data-i18n="en">Children</span></h2>
+      <p data-i18n="ru">Игра не предназначена для сбора данных о детях младше возраста, установленного
+      законодательством вашей страны как возраст согласия на обработку персональных данных.
+      Если вы считаете, что ребёнок предоставил нам данные без согласия родителей, свяжитесь
+      с нами для их удаления.</p>
+      <p data-i18n="en">The game is not intended to collect data from children under the age of
+      consent set by your country's law. If you believe a child provided us data without
+      parental consent, contact us and we'll delete it.</p>
+    </section>
+
+    <section id="security">
+      <span class="section-num">06</span>
+      <h2><span data-i18n="ru">Безопасность</span><span data-i18n="en">Security</span></h2>
+      <p data-i18n="ru">Локальные данные игры защищены от подделки (HMAC-подпись локального хранилища).
+      Передача данных внешним сервисам выполняется по протоколам, используемым
+      соответствующими SDK (Firebase, Yandex, платёжные системы).</p>
+      <p data-i18n="en">Local game data is tamper-protected (HMAC-signed local storage). Data sent to
+      external services follows the protocols used by the respective SDKs (Firebase, Yandex,
+      payment providers).</p>
+    </section>
+
+    <section id="changes">
+      <span class="section-num">07</span>
+      <h2><span data-i18n="ru">Изменения политики</span><span data-i18n="en">Policy changes</span></h2>
+      <p data-i18n="ru">Мы можем обновлять эту политику при изменении функциональности игры. Дата
+      вступления в силу актуальной версии указана в начале документа.</p>
+      <p data-i18n="en">We may update this policy as the game's functionality changes. The effective
+      date of the current version is shown at the top of this document.</p>
+    </section>
+
+    <section id="contact">
+      <span class="section-num">08</span>
+      <h2><span data-i18n="ru">Контакты</span><span data-i18n="en">Contact</span></h2>
+      <p data-i18n="ru">По всем вопросам, связанным с обработкой данных, пишите нам напрямую.</p>
+      <p data-i18n="en">For any questions about how your data is handled, reach out directly.</p>
+      <div class="contact-card">
+        <p><span data-i18n="ru">Разработчик отвечает на запросы об удалении и обработке данных лично.</span><span data-i18n="en">The developer personally handles data deletion and processing requests.</span></p>
+        <a href="mailto:nightwelf@gmail.com">nightwelf@gmail.com</a>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stored = localStorage.getItem('dropoly-privacy-lang');
+    var lang = stored || (navigator.language && navigator.language.toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
+    setLang(lang);
+
+    document.querySelectorAll('[data-set-lang]').forEach(function (btn) {
+      btn.addEventListener('click', function () { setLang(btn.getAttribute('data-set-lang')); });
+    });
+
+    function setLang(l) {
+      root.setAttribute('lang', l);
+      root.setAttribute('data-lang', l);
+      localStorage.setItem('dropoly-privacy-lang', l);
+      document.querySelectorAll('[data-set-lang]').forEach(function (btn) {
+        btn.setAttribute('aria-pressed', String(btn.getAttribute('data-set-lang') === l));
+      });
+    }
+  })();
+</script>
+</body>
+</html>
